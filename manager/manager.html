@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<div style="display: flex; justify-content: center; align-items: center; flex-direction: column; width: 100%;">
+	
+<h3 style="color:blue">Manager Page</h3>
+<button alt="next" type="button" onclick="sendpostrequest();"> <img src="1.png" style="max-width: 150px; margin: 0 auto; display: block;"></button>
+</div>
+
+<script>
+function sendpostrequest() {
+	
+	xhr = new XMLHttpRequest();
+	var url = "https://m81kko67a8.execute-api.us-east-1.amazonaws.com/v0/rahmet-api";
+	xhr.open("POST", url, true);
+	xhr.setRequestHeader("Content-type", "application/json");
+	xhr.onreadystatechange = function () { 
+	    if (xhr.readyState == 4 && xhr.status == 200) {
+	        var json = JSON.parse(xhr.responseText);
+	    }
+	}
+	var data = JSON.stringify({'procedure':'changeStatus'});
+	xhr.send(data);
+	console.log(data);
+}
+
+
+
+</script>
+</body>
+</html>
+
