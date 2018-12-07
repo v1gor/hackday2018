@@ -1,4 +1,3 @@
-
 import telebot
 import constants
 import requests
@@ -21,8 +20,8 @@ ulng = 0
 @bot.message_handler(commands=['start'])
 def handle_start(message):
     user_markup = telebot.types.ReplyKeyboardMarkup(True, False)
-    user_markup.row("Поиск Банков")
-    bot.send_message(message.chat.id, 'Добро пожаловать!', reply_markup=user_markup)
+    user_markup.row("РџРѕРёСЃРє Р‘Р°РЅРєРѕРІ")
+    bot.send_message(message.chat.id, 'Р”РѕР±СЂРѕ РїРѕР¶Р°Р»РѕРІР°С‚СЊ!', reply_markup=user_markup)
     print(message.chat.id)
 
 @bot.message_handler(content_types=['text'])
@@ -37,7 +36,7 @@ def handle_text(message):
         s = json.loads(text)
         if s == "error":
             print("fghj")
-            bot.send_message(message.chat.id, 'Ваша очередь прошла', reply_markup=user_markup)
+            bot.send_message(message.chat.id, 'Р’Р°С€Р° РѕС‡РµСЂРµРґСЊ РїСЂРѕС€Р»Р°', reply_markup=user_markup)
             return None
         else:
             left = s.get('left')
@@ -45,7 +44,7 @@ def handle_text(message):
             print(s)
             print(r.json)
             print(data)
-            bot.send_message(message.chat.id, 'Перед Вами ' + str(left) + ' человек', reply_markup=user_markup)
+            bot.send_message(message.chat.id, 'РџРµСЂРµРґ Р’Р°РјРё ' + str(left) + ' С‡РµР»РѕРІРµРє', reply_markup=user_markup)
             return left
 
     def take_order():
@@ -64,67 +63,66 @@ def handle_text(message):
             print(s)
             print(data)
             print(left)
-            user_markup.row("Узнать очередь")
-            user_markup.row("Назад")
-            bot.send_message(message.chat.id, 'Вы успешно зарегистрировались!', reply_markup=user_markup)
+            user_markup.row("РЈР·РЅР°С‚СЊ РѕС‡РµСЂРµРґСЊ")
+            user_markup.row("РќР°Р·Р°Рґ")
+            bot.send_message(message.chat.id, 'Р’С‹ СѓСЃРїРµС€РЅРѕ Р·Р°СЂРµРіРёСЃС‚СЂРёСЂРѕРІР°Р»РёСЃСЊ!', reply_markup=user_markup)
 
             if left == 1:
-                bot.send_message(message.chat.id, "Вам осталось 10 минут ожидания\n Перед вами "+ str(left) +" человек", disable_notification=False)
+                bot.send_message(message.chat.id, "Р’Р°Рј РѕСЃС‚Р°Р»РѕСЃСЊ 10 РјРёРЅСѓС‚ РѕР¶РёРґР°РЅРёСЏ\n РџРµСЂРµРґ РІР°РјРё "+ str(left) +" С‡РµР»РѕРІРµРє", disable_notification=False)
             elif left == 2:
-                bot.send_message(message.chat.id, "Вам осталось 25 минут ожидания\n Перед вами "+ str(left) +" человек", disable_notification=False)
+                bot.send_message(message.chat.id, "Р’Р°Рј РѕСЃС‚Р°Р»РѕСЃСЊ 25 РјРёРЅСѓС‚ РѕР¶РёРґР°РЅРёСЏ\n РџРµСЂРµРґ РІР°РјРё "+ str(left) +" С‡РµР»РѕРІРµРє", disable_notification=False)
 
         else:
             print("error")
-            bot.send_message(message.chat.id, 'Вы уже стоите в очереди!', reply_markup=user_markup)
+            bot.send_message(message.chat.id, 'Р’С‹ СѓР¶Рµ СЃС‚РѕРёС‚Рµ РІ РѕС‡РµСЂРµРґРё!', reply_markup=user_markup)
 
-    if message.text == "Поиск Банков":
+    if message.text == "РџРѕРёСЃРє Р‘Р°РЅРєРѕРІ":
         keyboard = telebot.types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)
-        button = telebot.types.KeyboardButton(text="Ближайшие", request_location=True)
-        listed = telebot.types.KeyboardButton(text="В городе")
-        back = telebot.types.KeyboardButton(text="Назад")
+        button = telebot.types.KeyboardButton(text="Р‘Р»РёР¶Р°Р№С€РёРµ", request_location=True)
+        listed = telebot.types.KeyboardButton(text="Р’ РіРѕСЂРѕРґРµ")
+        back = telebot.types.KeyboardButton(text="РќР°Р·Р°Рґ")
         keyboard.add(button, listed, back)
 
-        bot.send_message(message.chat.id, "Выберите ", reply_markup=keyboard)
+        bot.send_message(message.chat.id, "Р’С‹Р±РµСЂРёС‚Рµ ", reply_markup=keyboard)
 
-    elif message.text == "Ближайшие":
+    elif message.text == "Р‘Р»РёР¶Р°Р№С€РёРµ":
         keyboard = telebot.types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)
-        button = telebot.types.KeyboardButton(text=":round_pushpin: Отправить местоположение", request_location=True)
-        back = telebot.types.KeyboardButton(text="Назад")
+        button = telebot.types.KeyboardButton(text="рџ“Ќ РћС‚РїСЂР°РІРёС‚СЊ РјРµСЃС‚РѕРїРѕР»РѕР¶РµРЅРёРµ", request_location=True)
+        back = telebot.types.KeyboardButton(text="РќР°Р·Р°Рґ")
         keyboard.add(button, back)
-        bot.send_message(message.chat.id, "Отправьте, пожалуйста, локацию: ", reply_markup=keyboard)
+        bot.send_message(message.chat.id, "РћС‚РїСЂР°РІСЊС‚Рµ, РїРѕР¶Р°Р»СѓР№СЃС‚Р°, Р»РѕРєР°С†РёСЋ: ", reply_markup=keyboard)
 
-    elif message.text == "В городе":
+    elif message.text == "Р’ РіРѕСЂРѕРґРµ":
         keyboard = telebot.types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)
-        button = telebot.types.KeyboardButton(text=":round_pushpin: Отправить местоположение", request_location=True)
-        back = telebot.types.KeyboardButton(text="Назад")
+        button = telebot.types.KeyboardButton(text="рџ“Ќ РћС‚РїСЂР°РІРёС‚СЊ РјРµСЃС‚РѕРїРѕР»РѕР¶РµРЅРёРµ", request_location=True)
+        back = telebot.types.KeyboardButton(text="РќР°Р·Р°Рґ")
         keyboard.add(button, back)
-        bot.send_message(message.chat.id, "Отправьте, пожалуйста, локацию: ", reply_markup=keyboard)
+        bot.send_message(message.chat.id, "РћС‚РїСЂР°РІСЊС‚Рµ, РїРѕР¶Р°Р»СѓР№СЃС‚Р°, Р»РѕРєР°С†РёСЋ: ", reply_markup=keyboard)
 
-    if messa
-ge.text == "Занять очередь":
+    if message.text == "Р—Р°РЅСЏС‚СЊ РѕС‡РµСЂРµРґСЊ":
         keyboard = telebot.types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)
-        card = telebot.types.KeyboardButton(text="Создать карточку")
-        credit = telebot.types.KeyboardButton(text="Получить кредит")
-        balance = telebot.types.KeyboardButton(text="Пополнить счет")
-        back = telebot.types.KeyboardButton(text="Назад")
+        card = telebot.types.KeyboardButton(text="РЎРѕР·РґР°С‚СЊ РєР°СЂС‚РѕС‡РєСѓ")
+        credit = telebot.types.KeyboardButton(text="РџРѕР»СѓС‡РёС‚СЊ РєСЂРµРґРёС‚")
+        balance = telebot.types.KeyboardButton(text="РџРѕРїРѕР»РЅРёС‚СЊ СЃС‡РµС‚")
+        back = telebot.types.KeyboardButton(text="РќР°Р·Р°Рґ")
         keyboard.add(card, credit, balance, back)
-        bot.send_message(message.chat.id, "Выберите операцию", reply_markup=keyboard)
-    elif message.text == "Создать карточку":
+        bot.send_message(message.chat.id, "Р’С‹Р±РµСЂРёС‚Рµ РѕРїРµСЂР°С†РёСЋ", reply_markup=keyboard)
+    elif message.text == "РЎРѕР·РґР°С‚СЊ РєР°СЂС‚РѕС‡РєСѓ":
         time = 15
         take_order()
-    elif message.text == "Получить кредит":
+    elif message.text == "РџРѕР»СѓС‡РёС‚СЊ РєСЂРµРґРёС‚":
         time = 30
         take_order()
-    elif message.text == "Пополнить счет":
+    elif message.text == "РџРѕРїРѕР»РЅРёС‚СЊ СЃС‡РµС‚":
         time = 5
         take_order()
-    elif message.text == "Узнать очередь":
+    elif message.text == "РЈР·РЅР°С‚СЊ РѕС‡РµСЂРµРґСЊ":
         know_order()
-    elif message.text == "Назад":
+    elif message.text == "РќР°Р·Р°Рґ":
         user_markup = telebot.types.ReplyKeyboardMarkup(True, False)
-        user_markup.row("Поиск Банков")
-        user_markup.row("Занять очередь")
-        bot.send_message(message.chat.id, 'Меню', reply_markup=user_markup)
+        user_markup.row("РџРѕРёСЃРє Р‘Р°РЅРєРѕРІ")
+        user_markup.row("Р—Р°РЅСЏС‚СЊ РѕС‡РµСЂРµРґСЊ")
+        bot.send_message(message.chat.id, 'РњРµРЅСЋ', reply_markup=user_markup)
 
 @bot.message_handler(content_types=['location'])
 def handle_location(message):
@@ -154,14 +152,14 @@ def handle_location(message):
                 rating = "unknown"
 
             if not (name.lower().find("halyk") == -1):
-                bot.send_message(message.chat.id, ":pushpin: name: " + str(name) + "\n" + ":round_pushpin: address: " + str(
-                    address) + "\n" + ":star: rating: " + str(
-                    rating) + "\n" + ":door: Open/Close: " + opennow + "\n" + ":round_pushpin: location: ")
+                bot.send_message(message.chat.id, "рџ“Њ name: " + str(name) + "\n" + "рџ“Ќ address: " + str(
+                    address) + "\n" + "в­ђпёЏ rating: " + str(
+                    rating) + "\n" + "рџљЄ Open/Close: " + opennow + "\n" + "рџ“Ќ location: ")
                 bot.send_location(message.chat.id, lat, lng)
                 keyboard = telebot.types.InlineKeyboardMarkup()
-                button = telebot.types.InlineKeyboardButton(text="Выбрать", callback_data='test1')
+                button = telebot.types.InlineKeyboardButton(text="Р’С‹Р±СЂР°С‚СЊ", callback_data='test1')
                 keyboard.add(button)
-                bot.send_message(message.chat.id, 'Нажмите на кнопку', reply_markup=keyboard)
+                bot.send_message(message.chat.id, 'РќР°Р¶РјРёС‚Рµ РЅР° РєРЅРѕРїРєСѓ', reply_markup=keyboard)
 
 @bot.callback_query_handler(func=lambda call: True)
 def callback_inline(call):
@@ -175,7 +173,7 @@ def callback_inline(call):
                 address = data[i]['formatted_address']
                 print(address)
                 return address
-            bot.answer_callback_query(callback_query_id=call.id, show_alert=False, text="Добавлено!")
+            bot.answer_callback_query(callback_query_id=call.id, show_alert=False, text="Р”РѕР±Р°РІР»РµРЅРѕ!")
 
 def read_audio(WAVE_FILENAME):
     with open(WAVE_FILENAME, 'rb') as f:
@@ -190,10 +188,10 @@ def handle_voice(message):
         json_data = json.loads(data)
 
     if not json_data['result']:
-        bot.send_message(message.from_user.id, 'Попробуйте еще раз')
+        bot.send_message(message.from_user.id, 'РџРѕРїСЂРѕР±СѓР№С‚Рµ РµС‰Рµ СЂР°Р·')
 
     else:
-bot.send_message(message.from_user.id, 'Подождите чуть-чуть...')
+        bot.send_message(message.from_user.id, 'РџРѕРґРѕР¶РґРёС‚Рµ С‡СѓС‚СЊ-С‡СѓС‚СЊ...')
         file_idwka = json_data['result'][0]['message']['voice']['file_id']
         file_path_urlq = 'https://api.telegram.org/bot534897366:AAGLaU_kh5Ae8RE_Ww7cJ7nH97x8-nL8I1c/getFile?file_id=' + file_idwka
         data1 = requests.get(file_path_urlq).text
@@ -228,7 +226,7 @@ bot.send_message(message.from_user.id, 'Подождите чуть-чуть...')
             text = r.content.decode('utf8').replace("'", '"')
             s = json.loads(text)
             if s == "error":
-                bot.send_message(message.chat.id, 'Ваша очередь прошла', reply_markup=user_markup)
+                bot.send_message(message.chat.id, 'Р’Р°С€Р° РѕС‡РµСЂРµРґСЊ РїСЂРѕС€Р»Р°', reply_markup=user_markup)
                 return None
             else:
                 left = s.get('left')
@@ -236,7 +234,7 @@ bot.send_message(message.from_user.id, 'Подождите чуть-чуть...')
                 print(s)
                 print(r.json)
                 print(data)
-                bot.send_message(message.chat.id, 'Перед вами ' + str(left) + ' человек', reply_markup=user_markup)
+                bot.send_message(message.chat.id, 'РџРµСЂРµРґ РІР°РјРё ' + str(left) + ' С‡РµР»РѕРІРµРє', reply_markup=user_markup)
                 return left
 
         def take_order():
@@ -252,37 +250,38 @@ bot.send_message(message.from_user.id, 'Подождите чуть-чуть...')
                 print(r.json)
                 print(data)
                 print(left)
-                user_markup.row("Узнать очередь")
-                user_markup.row("Назад")
-                bot.send_message(message.chat.id, 'Вы успешно зарегистрировались!', reply_markup=user_markup)
+                user_markup.row("РЈР·РЅР°С‚СЊ РѕС‡РµСЂРµРґСЊ")
+                user_markup.row("РќР°Р·Р°Рґ")
+                bot.send_message(message.chat.id, 'Р’С‹ СѓСЃРїРµС€РЅРѕ Р·Р°СЂРµРіРёСЃС‚СЂРёСЂРѕРІР°Р»РёСЃСЊ!', reply_markup=user_markup)
                 if left == 1:
                     bot.send_message(message.chat.id,
-                                     "Вам осталось 10 минут ожидания\n Перед вами " + str(left) + " человек",
+                                     "Р’Р°Рј РѕСЃС‚Р°Р»РѕСЃСЊ 10 РјРёРЅСѓС‚ РѕР¶РёРґР°РЅРёСЏ\n РџРµСЂРµРґ РІР°РјРё " + str(left) + " С‡РµР»РѕРІРµРє",
                                      disable_notification=False)
                 elif left == 2:
                     bot.send_message(message.chat.id,
-                                     "Вам осталось 25 минут ожидания\n Перед вами " + str(left) + " человек",
+                                     "Р’Р°Рј РѕСЃС‚Р°Р»РѕСЃСЊ 25 РјРёРЅСѓС‚ РѕР¶РёРґР°РЅРёСЏ\n РџРµСЂРµРґ РІР°РјРё " + str(left) + " С‡РµР»РѕРІРµРє",
                                      disable_notification=False)
             else:
                 print("error")
-                bot.send_message(message.chat.id, 'Вы уже стоите в очереди!', reply_markup=user_markup)
+                bot.send_message(message.chat.id, 'Р’С‹ СѓР¶Рµ СЃС‚РѕРёС‚Рµ РІ РѕС‡РµСЂРµРґРё!', reply_markup=user_markup)
 
-        if not(user_output.find("банк")==-1):
+        if not(user_output.find("Р±Р°РЅРє")==-1):
             keyboard = telebot.types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)
-            button = telebot.types.KeyboardButton(text="Ближайшие", request_location=True)
-            listed = telebot.types.KeyboardButton(text="В городе")
-            back = telebot.types.KeyboardButton(text="Назад")
+            button = telebot.types.KeyboardButton(text="Р‘Р»РёР¶Р°Р№С€РёРµ", request_location=True)
+            listed = telebot.types.KeyboardButton(text="Р’ РіРѕСЂРѕРґРµ")
+            back = telebot.types.KeyboardButton(text="РќР°Р·Р°Рґ")
             keyboard.add(button, listed, back)
 
-            bot.send_message(message.chat.id, "Выберите ", reply_markup=keyboard)
-elif not(user_output.find("ближайшие")==-1) or not(user_output.find("рядом")==-1):
-            keyboard = telebot.types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)
-            button = telebot.types.KeyboardButton(text=":round_pushpin: Отправить местоположение", request_location=True)
-            back = telebot.types.KeyboardButton(text="Назад")
-            keyboard.add(button, back)
-            bot.send_message(message.chat.id, "Отправьте, пожалуйста, локацию: ", reply_markup=keyboard)
+            bot.send_message(message.chat.id, "Р’С‹Р±РµСЂРёС‚Рµ ", reply_markup=keyboard)
 
-        elif not(user_output.find("город")==-1):
+        elif not(user_output.find("Р±Р»РёР¶Р°Р№С€РёРµ")==-1) or not(user_output.find("СЂСЏРґРѕРј")==-1):
+            keyboard = telebot.types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)
+            button = telebot.types.KeyboardButton(text="рџ“Ќ РћС‚РїСЂР°РІРёС‚СЊ РјРµСЃС‚РѕРїРѕР»РѕР¶РµРЅРёРµ", request_location=True)
+            back = telebot.types.KeyboardButton(text="РќР°Р·Р°Рґ")
+            keyboard.add(button, back)
+            bot.send_message(message.chat.id, "РћС‚РїСЂР°РІСЊС‚Рµ, РїРѕР¶Р°Р»СѓР№СЃС‚Р°, Р»РѕРєР°С†РёСЋ: ", reply_markup=keyboard)
+
+        elif not(user_output.find("РіРѕСЂРѕРґ")==-1):
             with urllib.request.urlopen(
                     "https://maps.googleapis.com/maps/api/place/textsearch/json?query=bank+in+Almaty&key=AIzaSyC0AuanxSq5DMmcnojnInlFRzqz0KF5HZI") as url:
                 data = json.loads(url.read().decode())['results']
@@ -305,38 +304,38 @@ elif not(user_output.find("ближайшие")==-1) or not(user_output.find("рядом")==-1
                     else:
                         rating = "unknown"
                     if not (name.lower().find("halyk") == -1):
-                        bot.send_message(message.chat.id, ":pushpin: name: " + str(name) + "\n" + ":round_pushpin: address: " + str(
-                            address) + "\n" + ":star: rating: " + str(
-                            rating) + "\n" + ":door: Open/Close: " + opennow + "\n" + ":round_pushpin: location: ")
+                        bot.send_message(message.chat.id, "рџ“Њ name: " + str(name) + "\n" + "рџ“Ќ address: " + str(
+                            address) + "\n" + "в­ђпёЏ rating: " + str(
+                            rating) + "\n" + "рџљЄ Open/Close: " + opennow + "\n" + "рџ“Ќ location: ")
                         bot.send_location(message.chat.id, lat, lng)
                         keyboard = telebot.types.InlineKeyboardMarkup()
-                        button = telebot.types.InlineKeyboardButton(text="Выбрать", callback_data="test1")
+                        button = telebot.types.InlineKeyboardButton(text="Р’С‹Р±СЂР°С‚СЊ", callback_data="test1")
                         keyboard.add(button)
-                        bot.send_message(message.chat.id, 'Нажмите на кнопку', reply_markup=keyboard)
+                        bot.send_message(message.chat.id, 'РќР°Р¶РјРёС‚Рµ РЅР° РєРЅРѕРїРєСѓ', reply_markup=keyboard)
 
-        if not(user_output.find("занять очередь")==-1):
+        if not(user_output.find("Р·Р°РЅСЏС‚СЊ РѕС‡РµСЂРµРґСЊ")==-1):
             keyboard = telebot.types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)
-            card = telebot.types.KeyboardButton(text="Создать карточку")
-            credit = telebot.types.KeyboardButton(text="Получить кредит")
-            balance = telebot.types.KeyboardButton(text="Пополнить счет")
-            back = telebot.types.KeyboardButton(text="Назад")
+            card = telebot.types.KeyboardButton(text="РЎРѕР·РґР°С‚СЊ РєР°СЂС‚РѕС‡РєСѓ")
+            credit = telebot.types.KeyboardButton(text="РџРѕР»СѓС‡РёС‚СЊ РєСЂРµРґРёС‚")
+            balance = telebot.types.KeyboardButton(text="РџРѕРїРѕР»РЅРёС‚СЊ СЃС‡РµС‚")
+            back = telebot.types.KeyboardButton(text="РќР°Р·Р°Рґ")
             keyboard.add(card, credit, balance, back)
-            bot.send_message(message.chat.id, "Выберите операцию", reply_markup=keyboard)
-        elif not(user_output.find("карт")==-1):
+            bot.send_message(message.chat.id, "Р’С‹Р±РµСЂРёС‚Рµ РѕРїРµСЂР°С†РёСЋ", reply_markup=keyboard)
+        elif not(user_output.find("РєР°СЂС‚")==-1):
             time = 15
             take_order()
-        elif not(user_output.find("кредит")==-1):
+        elif not(user_output.find("РєСЂРµРґРёС‚")==-1):
             time = 30
             take_order()
-        elif not(user_output.find("счет")==-1):
+        elif not(user_output.find("СЃС‡РµС‚")==-1):
             time = 5
             take_order()
-        elif not(user_output.find("узнать очередь")==-1):
+        elif not(user_output.find("СѓР·РЅР°С‚СЊ РѕС‡РµСЂРµРґСЊ")==-1):
             know_order()
-        elif user_output == "назад":
+        elif user_output == "РЅР°Р·Р°Рґ":
             user_markup = telebot.types.ReplyKeyboardMarkup(True, False)
-            user_markup.row("Поиск Банков")
-            user_markup.row("Занять очередь")
-            bot.send_message(message.chat.id, 'Меню', reply_markup=user_markup)
+            user_markup.row("РџРѕРёСЃРє Р‘Р°РЅРєРѕРІ")
+            user_markup.row("Р—Р°РЅСЏС‚СЊ РѕС‡РµСЂРµРґСЊ")
+            bot.send_message(message.chat.id, 'РњРµРЅСЋ', reply_markup=user_markup)
 
 bot.polling(none_stop=True, interval=1)
